@@ -7,7 +7,7 @@ learn [Amazon Kendra](https://aws.amazon.com/kendra/), intelligent search servic
 * Index - two types. document (unstructured) and [FAQ (structured)](https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html)
     * You can add documents directly to an index using the BatchPutDocument operation
     * You can add questions and answers (FAQs) directly to your index using the console or the CreateFaq operation
-* Data Source - s3, salesforce documents, sharepoint
+* Data Source - s3, salesforce documents, sharepoint, *custom*
 * Documents - html, ppt, doc, pdf, txt
     * custom fields - can define custom fields of types: Date, Number, String, String List
 * Queries - natural language (NLP), keyword queries, Factoid questions — Simple
