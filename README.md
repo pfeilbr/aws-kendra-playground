@@ -32,7 +32,7 @@ who, what, when, or where questions.
 
 You specify `Edition: DEVELOPER_EDITION | ENTERPRISE_EDITION` when you create an index
 
---
+---
 
 ## Creating Example Index
 
