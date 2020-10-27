@@ -36,6 +36,8 @@ You specify `Edition: DEVELOPER_EDITION | ENTERPRISE_EDITION` when you create an
 
 ## Creating Example Index
 
+see [`main.py`](main.py)
+
 ```sh
 sam deploy --guided
 # copy outputs into `.env`
