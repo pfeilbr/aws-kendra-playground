@@ -1,0 +1,90 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Kendra resources
+
+Resources:
+  DocumentsBucket: # bucket to hold documents to index
+    Type: AWS::S3::Bucket
+
+  KendraCloudWatchRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "kendra.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: KendraCloudWatch
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - cloudwatch:PutMetricData
+                Resource: "*"
+                Condition:
+                  StringEquals:
+                    cloudwatch:namespace: AWS/Kendra
+              - Effect: Allow
+                Action:
+                  - logs:DescribeLogGroups
+                Resource: "*"
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                Resource:
+                  - !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/kendra/*
+              - Effect: Allow
+                Action:
+                  - logs:DescribeLogStreams
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource:
+                  - !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/kendra/*
+
+  KendraBucketRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "kendra.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: KendraBucket
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Action:
+                  - s3:GetObject
+                Resource: !Sub arn:aws:s3:::${DocumentsBucket}/*
+                Effect: Allow
+              - Action:
+                  - s3:ListBucket
+                Resource: !Sub arn:aws:s3:::${DocumentsBucket}
+                Effect: Allow
+              - Effect: Allow
+                Action:
+                  - kendra:BatchPutDocument
+                  - kendra:BatchDeleteDocument
+                Resource: !Sub arn:aws:kendra:${AWS::Region}:${AWS::AccountId}:index/*
+
+Outputs:
+  DocumentsBucketName:
+    Description: "DocumentsBucket Name"
+    Value: !Ref DocumentsBucket
+
+  KendraCloudWatchRoleArn:
+    Description: "KendraCloudWatchRole Arn"
+    Value: !GetAtt KendraCloudWatchRole.Arn
+
+  KendraBucketRoleArn:
+    Description: "KendraBucketRole Arn"
+    Value: !GetAtt KendraBucketRole.Arn

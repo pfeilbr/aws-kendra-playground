@@ -32,6 +32,16 @@ who, what, when, or where questions.
 
 You specify `Edition: DEVELOPER_EDITION | ENTERPRISE_EDITION` when you create an index
 
+--
+
+## Creating Example Index
+
+```sh
+sam deploy --guided
+# copy outputs into `.env`
+python main.py
+```
+
 ## Resources
 
 * [Amazon Kendra Docs](https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html)
