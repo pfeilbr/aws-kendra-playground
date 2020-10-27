@@ -35,7 +35,7 @@ You specify `Edition: DEVELOPER_EDITION | ENTERPRISE_EDITION` when you create an
 ## Resources
 
 * [Amazon Kendra Docs](https://docs.aws.amazon.com/kendra/latest/dg/what-is-kendra.html)
-* [Getting started (AWS SDK for Python (Boto3)) - Amazon Kendra](https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html)
+* [Getting started (AWS SDK for Python (Boto3)) - Amazon Kendra](https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html) - shows create index, create data source for index, sync data source, all while waiting for each step to complete in between
 * [Deploying Amazon Kendra](https://docs.aws.amazon.com/kendra/latest/dg/deploying.html) - pre-built react frontend for kendra.  provides `<search />` react component
     * <https://kendrasamples.s3.amazonaws.com/kendrasamples.zip>
 * [aws-samples/enterprise-search-with-amazon-kendra-workshop](https://github.com/aws-samples/enterprise-search-with-amazon-kendra-workshop)
