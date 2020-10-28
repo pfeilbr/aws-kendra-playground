@@ -27,6 +27,7 @@ try:
         index_response = list_indices_response["IndexConfigurationSummaryItems"][0]
     else:
         index_response = kendra.create_index(
+            Edition='DEVELOPER_EDITION',
             Description=description,
             Name=index_name,
             RoleArn=index_role_arn
